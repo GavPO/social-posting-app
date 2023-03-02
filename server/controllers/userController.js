@@ -6,7 +6,6 @@ const { validateUser } = require("../utils/userUtils");
 async function getUsers(req, res) {
   try {
     const allUsers = await User.find().select("-password").select("-__v");
-
     return res.status(200).json(allUsers);
   } catch (err) {
     console.error(err);

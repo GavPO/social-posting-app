@@ -1,16 +1,9 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import NavBar from "../NavBar";
-import auth from "../../utils/auth";
 
 export default function Example() {
-  const handleGetUsers = async () => {
-    const usersRes = await fetch("/api/users", {
-      headers: {
-        authorization: "Bearer " + auth.getToken(),
-      },
-    });
-  };
+  const { allUsers } = useLoaderData();
 
   return (
     <>
@@ -21,9 +14,6 @@ export default function Example() {
           <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
               Social Poster
-              <button onClick={handleGetUsers} className="bg-emerald-500">
-                GET USERS
-              </button>
             </h1>
           </div>
         </header>
