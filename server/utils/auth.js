@@ -10,12 +10,21 @@ module.exports = {
     // allows token to be sent via  req.query or headers
     let token = req.query.token || req.headers.authorization;
 
+    console.log("### token", token);
+    console.log(
+      "### req.query",
+      req.query.token,
+      "### req.headers",
+      req.headers.authorization
+    );
+
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
     }
 
     if (!token) {
+      res.statusMessage = "You have no token!";
       return res.status(400).json({ message: "You have no token!" });
     }
 
@@ -24,6 +33,7 @@ module.exports = {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
+      res.statusMessage = "invalid token!";
       return res.status(400).json({ message: "invalid token!" });
     }
 

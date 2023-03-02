@@ -64,6 +64,7 @@ async function login(req, res) {
     const user = await User.findOne({ email: req.body.email }).select("-__v");
 
     if (!user) {
+      res.statusMessage = "Incorrect email or password, please try again";
       return res
         .status(400)
         .json({ message: "Incorrect email or password, please try again" });
@@ -71,6 +72,7 @@ async function login(req, res) {
 
     const validPassword = await user.isCorrectPassword(req.body.password);
     if (!validPassword) {
+      res.statusMessage = "Incorrect email or password, please try again";
       return res
         .status(400)
         .json({ message: "Incorrect email or password, please try again" });
