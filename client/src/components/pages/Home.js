@@ -10,7 +10,6 @@ export default function Example() {
         authorization: "Bearer " + auth.getToken(),
       },
     });
-    console.log("## get users", await usersRes.json());
   };
 
   return (

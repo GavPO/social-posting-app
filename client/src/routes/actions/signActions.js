@@ -2,7 +2,6 @@ import auth from "../../utils/auth";
 
 export const loginAction = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
-  console.log("### help");
 
   let loginRes = await fetch(`/login`, {
     method: "POST",
@@ -11,10 +10,8 @@ export const loginAction = async ({ request }) => {
     },
     body: JSON.stringify(formData),
   });
-  console.log("after");
   loginRes = await loginRes.json();
   auth.login(loginRes.token);
-  console.log("### loginRes", loginRes);
 
   return { loginRes };
 };
@@ -31,7 +28,6 @@ export const signupAction = async ({ request }) => {
   });
   signupRes = await signupRes.json();
   auth.login(signupRes.token);
-  console.log("### signupRes", signupRes);
 
   return { signupRes };
 };
