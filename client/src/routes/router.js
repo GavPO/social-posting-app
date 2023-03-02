@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../components/pages/ErrorPage";
 import Home from "../components/pages/Home";
 import Login from "../components/pages/Login";
-import { loginAction } from "./actions/signActions";
+import { loginAction, signupAction } from "./actions/signActions";
+import Signup from "../components/pages/Signup";
 
 export default createBrowserRouter([
   {
@@ -16,5 +17,11 @@ export default createBrowserRouter([
     element: <Login />,
     errorElement: <ErrorPage />,
     action: loginAction,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+    errorElement: <ErrorPage />,
+    action: signupAction,
   },
 ]);
