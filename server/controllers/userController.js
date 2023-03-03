@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const { signToken } = require("../utils/auth");
 const { validateUser } = require("../utils/userUtils");
+const gravatar = require("gravatar");
 
 async function getUsers(req, res) {
   try {
@@ -47,7 +48,8 @@ async function createUser(req, res) {
     if (alreadyOne) {
       return res.status(400).json({ message: "User already exists!" });
     } else {
-      const user = await User.create(req.body);
+      const avatar = gravatar.url(req.body.email, true);
+      const user = await User.create({ ...req.body, avatar });
       const token = signToken(user);
 
       return res.status(200).json({ user, token });

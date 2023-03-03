@@ -1,4 +1,5 @@
 import auth from "../../utils/auth";
+import { redirect } from "react-router-dom";
 
 export const loginAction = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
@@ -10,10 +11,14 @@ export const loginAction = async ({ request }) => {
     },
     body: JSON.stringify(formData),
   });
-  loginRes = await loginRes.json();
-  auth.login(loginRes.token);
 
-  return { loginRes };
+  if (loginRes.ok) {
+    console.log("should redirect");
+    loginRes = await loginRes.json();
+
+    auth.login(loginRes.token);
+    return redirect("/");
+  }
 };
 
 export const signupAction = async ({ request }) => {
@@ -26,8 +31,12 @@ export const signupAction = async ({ request }) => {
     },
     body: JSON.stringify(formData),
   });
-  signupRes = await signupRes.json();
-  auth.login(signupRes.token);
 
-  return { signupRes };
+  if (signupRes.ok) {
+    console.log("should redirect");
+    signupRes = await signupRes.json();
+
+    auth.login(signupRes.token);
+    return redirect("/");
+  }
 };

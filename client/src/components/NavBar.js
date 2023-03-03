@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const navigation = [
-    { name: "Dashboard", href: "/", current: true },
-    { name: "Profile", href: "/profile", current: false },
-    { name: "Feed", href: "/feed", current: false },
+    { name: "Dashboard", to: "/", current: true },
+    { name: "Profile", to: "/profile", current: false },
+    { name: "Feed", to: "/feed", current: false },
   ];
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    { name: "Your Profile", to: "/profile" },
+    { name: "Settings", to: "/toobad" },
+    { name: "Sign out", to: "/logout" },
   ];
 
   function classNames(...classes) {
@@ -38,7 +38,7 @@ export default function NavBar() {
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
-                        to={item.href}
+                        to={item.to}
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -88,7 +88,7 @@ export default function NavBar() {
                           <Menu.Item key={item.name}>
                             {({ active }) => (
                               <Link
-                                to={item.href}
+                                to={item.to}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
@@ -119,65 +119,93 @@ export default function NavBar() {
           </div>
 
           <Disclosure.Panel className="md:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-            <div className="border-t border-gray-700 pt-4 pb-3">
-              <div className="flex items-center px-5">
-                <div className="flex-shrink-0">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src={""}
-                    alt="user profile"
-                  />
+            {({ close }) => (
+              <>
+                <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.to}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+                          : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+                      }
+                      onClick={() => close()}
+                    >
+                      {item.name}
+                    </Link>
+                    // <Disclosure.Button
+                    //   key={item.name}
+                    //   as={NavLink}
+                    //   to={item.to}
+                    //   className={classNames(
+                    //     item.current
+                    //       ? "bg-gray-900 text-white"
+                    //       : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    //     "block rounded-md px-3 py-2 text-base font-medium"
+                    //   )}
+                    //   aria-current={item.current ? "page" : undefined}
+                    // >
+                    //   {item.name}
+                    // </Disclosure.Button>
+                  ))}
                 </div>
-                <div className="ml-3">
-                  <div
-                    id="show-name"
-                    className="text-base font-medium leading-none text-white"
-                  >
-                    name
+                <div className="border-t border-gray-700 pt-4 pb-3">
+                  <div className="flex items-center px-5">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={""}
+                        alt="user profile"
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <div
+                        id="show-name"
+                        className="text-base font-medium leading-none text-white"
+                      >
+                        name
+                      </div>
+                      <div className="text-sm font-medium leading-none text-gray-400">
+                        email
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
                   </div>
-                  <div className="text-sm font-medium leading-none text-gray-400">
-                    email
+                  <div className="mt-3 space-y-1 px-2">
+                    {userNavigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.to}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+                            : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+                        }
+                        onClick={() => close()}
+                      >
+                        {item.name}
+                      </Link>
+                      // <Disclosure.Button
+                      //   key={item.name}
+                      //   as={NavLink}
+                      //   to={item.to}
+                      //   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                      // >
+                      //   {item.name}
+                      // </Disclosure.Button>
+                    ))}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                  >
-                    {item.name}
-                  </Disclosure.Button>
-                ))}
-              </div>
-            </div>
+              </>
+            )}
           </Disclosure.Panel>
         </>
       )}
