@@ -10,6 +10,10 @@ export default function ErrorPage() {
   const error = useRouteError();
   const navigate = useNavigate();
 
+  console.log('### error', error);
+
+
+
   console.log("isRouteErrorResponse", isRouteErrorResponse(error));
 
   useEffect(() => {

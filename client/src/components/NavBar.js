@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const navigation = [
-    { name: "Dashboard", to: "/", current: true },
-    { name: "Profile", to: "/profile", current: false },
-    { name: "Feed", to: "/feed", current: false },
+    { name: "Dashboard", to: "/", current: window.location.pathname === "/" },
+
+    { name: "Profile", to: "/profile", current: window.location.pathname === "/profile" },
+    { name: "Feed", to: "/feed", current: window.location.pathname === "/feed" },
   ];
   const userNavigation = [
     { name: "Your Profile", to: "/profile" },

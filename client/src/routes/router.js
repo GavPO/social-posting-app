@@ -7,6 +7,7 @@ import { loginAction, signupAction } from "./actions/signActions";
 import Signup from "../components/pages/Signup";
 import Profile from "../components/pages/Profile";
 import { profileLoader } from "./loaders/profileLoader";
+import Feed from "../components/pages/Feed";
 
 export default createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export default createBrowserRouter([
         path: "/profile",
         element: <Profile />,
         loader: profileLoader,
+      },
+      {
+        path: "/feed",
+        element: <Feed />,
       },
     ],
   },
