@@ -9,8 +9,8 @@ router.route('/').get(authMiddleware, getUsers)
 
 
 
-router.route('/:id').get(authMiddleware, getUser)
+router.route('/:userID').get(authMiddleware, getUser)
 
-router.route('/:id/posts').get(authMiddleware, getUsersPosts)
+router.route('/:userID/posts').get(authMiddleware, getUsersPosts)
 
 module.exports = router;

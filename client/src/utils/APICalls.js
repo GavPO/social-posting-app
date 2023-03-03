@@ -13,4 +13,10 @@ export const UsersAPI = {
         authorization: "Bearer " + auth.getToken(),
       },
     }),
+  getUsersPosts: async (id) =>
+    await fetch(`/api/users/${id}/posts`, {
+      headers: {
+        authorization: "Bearer " + auth.getToken(),
+      },
+    }),
 };

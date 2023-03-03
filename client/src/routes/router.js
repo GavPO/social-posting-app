@@ -5,6 +5,8 @@ import Login from "../components/pages/Login";
 import { homeLoader } from "./loaders/homeLoader";
 import { loginAction, signupAction } from "./actions/signActions";
 import Signup from "../components/pages/Signup";
+import Profile from "../components/pages/Profile";
+import { profileLoader } from "./loaders/profileLoader";
 
 export default createBrowserRouter([
   {
@@ -12,7 +14,13 @@ export default createBrowserRouter([
     element: <Home />,
     errorElement: <ErrorPage />,
     loader: homeLoader,
-    children: [],
+    children: [
+      {
+        path: "/profile",
+        element: <Profile />,
+        loader: profileLoader,
+      },
+    ],
   },
   {
     path: "/login",
