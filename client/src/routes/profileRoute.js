@@ -13,9 +13,9 @@ export const profileLoader = async ({ request }) => {
   const userProfile = auth.getProfile();
   const userProfileID = userProfile.data._id;
 
-  const myProfile = id === userProfileID;
-
   id = id ? id : (id = userProfileID);
+
+  const myProfile = id === userProfileID;
 
   let userData = await UsersAPI.get(id);
   if (!userData.ok) throw userData;
