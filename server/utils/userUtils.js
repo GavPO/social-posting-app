@@ -1,12 +1,10 @@
-const User = require("../models/User");
+const User = require('../models/User');
 
 const validateUser = async (body) => {
-  const { email, password, username } = body;
+  const { email, username } = body;
 
   return (
-    !!(await User.findOne({ email })) ||
-    !!(await User.findOne({ password })) ||
-    !!(await User.findOne({ username }))
+    !!(await User.findOne({ email })) || (await User.findOne({ username }))
   );
 };
 

@@ -11,9 +11,15 @@ export const CREATE_POST = 'CREATE_POST';
 let ALL_POSTS = null;
 
 export const feedLoader = async () => {
+  const userProfile = auth.getProfile();
+  const userProfileID = userProfile.data._id;
+
   let allPosts = await PostsAPI.getAll();
   if (!allPosts.ok) throw allPosts;
   allPosts = await allPosts.json();
+
+  allPosts = allPosts.filter((post) => post.user._id !== userProfileID);
+
   ALL_POSTS = allPosts;
 
   return { allPosts: ALL_POSTS };
