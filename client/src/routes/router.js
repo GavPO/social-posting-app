@@ -9,6 +9,7 @@ import { feedLoader, profileFeedLoader } from './feedRoute';
 import Signup from '../components/pages/Signup';
 import Profile from '../components/pages/Profile';
 import Feed from '../components/pages/Feed';
+import Dashboard from '../components/Dashboard';
 
 export default createBrowserRouter([
   {
@@ -17,6 +18,11 @@ export default createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: homeLoader,
     children: [
+      {
+        index: true,
+        element: <Dashboard />,
+        loader: feedLoader,
+      },
       {
         path: '/profile',
         element: <Profile />,

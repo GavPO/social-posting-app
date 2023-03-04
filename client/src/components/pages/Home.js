@@ -6,7 +6,7 @@ export default function Example() {
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full dark">
         <NavBar />
 
         <header className="bg-white shadow">

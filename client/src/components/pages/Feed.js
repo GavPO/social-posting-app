@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 
 export default function Feed() {
@@ -7,12 +7,9 @@ export default function Feed() {
   return (
     <>
       <div className="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-        <time className="text-lg font-semibold text-gray-900 dark:text-white">
-          January 13th, 2022
-        </time>
         <ol className="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
           {allPosts.map((post) => (
-            <>
+            <Fragment key={post._id}>
               <li>
                 <Link
                   to={`/profile?userID=${post.user._id}`}
@@ -23,7 +20,11 @@ export default function Feed() {
                     src={post.user.avatar}
                     alt={post.user.username}
                   />
+                  
                   <div className="text-gray-600 dark:text-gray-400">
+                  <time className="font-semibold text-gray-900 dark:text-white">
+          January 13th, 2022
+        </time>
                     <div className="text-base font-normal">
                       <span className="font-medium text-gray-900 dark:text-white">
                         {post.user.username} created a post!
@@ -33,7 +34,7 @@ export default function Feed() {
                   </div>
                 </Link>
               </li>
-            </>
+            </Fragment>
           ))}
         </ol>
       </div>
