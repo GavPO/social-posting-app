@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import tw, { styled, css } from "twin.macro";
+import Feed from "./Feed";
 
 export default function Profile() {
   const { myProfile, user, posts } = useLoaderData();
@@ -63,6 +64,7 @@ export default function Profile() {
             {showPosts ? "Hide Posts" : "Show Posts"}
           </button>
         </div>
+        {showPosts && <Feed />}
       </div>
     </div>
   );

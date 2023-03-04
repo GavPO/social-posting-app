@@ -1,40 +1,48 @@
-import { createBrowserRouter } from "react-router-dom";
-import ErrorPage from "../components/pages/ErrorPage";
-import Home from "../components/pages/Home";
-import Login from "../components/pages/Login";
-import { homeLoader } from "./loaders/homeLoader";
-import { loginAction, signupAction } from "./actions/signActions";
-import Signup from "../components/pages/Signup";
-import Profile from "../components/pages/Profile";
-import { profileLoader } from "./loaders/profileLoader";
-import Feed from "../components/pages/Feed";
+import { createBrowserRouter } from 'react-router-dom';
+import ErrorPage from '../components/pages/ErrorPage';
+import Home from '../components/pages/Home';
+import Login from '../components/pages/Login';
+import { homeLoader } from './homeRoute';
+import { loginAction, signupAction } from './signRoute';
+import { profileLoader } from './profileRoute';
+import { feedLoader } from './feedRoute';
+import Signup from '../components/pages/Signup';
+import Profile from '../components/pages/Profile';
+import Feed from '../components/pages/Feed';
 
 export default createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Home />,
     errorElement: <ErrorPage />,
     loader: homeLoader,
     children: [
       {
-        path: "/profile",
+        path: '/profile',
         element: <Profile />,
         loader: profileLoader,
+        children: [
+          {
+            index: true,
+            element: <Feed />,
+          },
+        ],
       },
       {
-        path: "/feed",
+        path: '/feed',
         element: <Feed />,
+        loader: feedLoader,
       },
     ],
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
     errorElement: <ErrorPage />,
     action: loginAction,
   },
   {
-    path: "/signup",
+    path: '/signup',
     element: <Signup />,
     errorElement: <ErrorPage />,
     action: signupAction,
