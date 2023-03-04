@@ -1,9 +1,8 @@
 import React from "react";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import NavBar from "../NavBar";
 
 export default function Example() {
-  const { allUsers } = useLoaderData();
 
   return (
     <>

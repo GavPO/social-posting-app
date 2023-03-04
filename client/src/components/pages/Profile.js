@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
-import tw, { styled, css } from "twin.macro";
-import Feed from "./Feed";
+import React, { useState } from 'react';
+import { Outlet, useLoaderData } from 'react-router-dom';
+import tw, { styled, css } from 'twin.macro';
 
 export default function Profile() {
   const { myProfile, user, posts } = useLoaderData();
@@ -61,10 +60,10 @@ export default function Profile() {
             className="text-indigo-500 py-2 px-4  font-medium mt-4"
             onClick={togglePosts}
           >
-            {showPosts ? "Hide Posts" : "Show Posts"}
+            {showPosts ? 'Hide Posts' : 'Show Posts'}
           </button>
         </div>
-        {showPosts && <Feed />}
+        {showPosts && <Outlet />}
       </div>
     </div>
   );

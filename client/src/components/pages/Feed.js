@@ -4,8 +4,6 @@ import { Link, useLoaderData } from 'react-router-dom';
 export default function Feed() {
   const { allPosts } = useLoaderData();
 
-  console.log('## allPosts', allPosts);
-
   return (
     <>
       <div className="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -17,7 +15,7 @@ export default function Feed() {
             <>
               <li>
                 <Link
-                  to={`/profile/${post.user._id}`}
+                  to={`/profile?userID=${post.user._id}`}
                   className="items-center block p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <img

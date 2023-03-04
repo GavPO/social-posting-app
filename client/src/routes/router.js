@@ -5,7 +5,7 @@ import Login from '../components/pages/Login';
 import { homeLoader } from './homeRoute';
 import { loginAction, signupAction } from './signRoute';
 import { profileLoader } from './profileRoute';
-import { feedLoader } from './feedRoute';
+import { feedLoader, profileFeedLoader } from './feedRoute';
 import Signup from '../components/pages/Signup';
 import Profile from '../components/pages/Profile';
 import Feed from '../components/pages/Feed';
@@ -25,6 +25,7 @@ export default createBrowserRouter([
           {
             index: true,
             element: <Feed />,
+            loader: profileFeedLoader,
           },
         ],
       },

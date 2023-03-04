@@ -1,16 +1,21 @@
 import { UsersAPI } from '../utils/APICalls';
+import auth from '../utils/auth';
 
 // TODO: DECIDE IF WE NEED TYPES ON THIS LOADER
 //* TYPES
 
 //* STATE
-let ALL_USERS = null;
+let USER_DATA = null;
 
 export const homeLoader = async () => {
-  let allUsers = await UsersAPI.getAll();
-  if (!allUsers.ok) throw allUsers;
-  allUsers = await allUsers.json();
-  ALL_USERS = allUsers;
+  const userProfile = auth.getProfile();
+  const userProfileID = userProfile.data._id;
 
-  return { allUsers: ALL_USERS };
+  let userData = await UsersAPI.get(userProfileID);
+
+  if (!userData.ok) throw userData;
+  userData = await userData.json();
+  USER_DATA = userData;
+
+  return { userData: USER_DATA };
 };
