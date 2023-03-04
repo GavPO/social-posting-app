@@ -4,7 +4,7 @@ const { validateBody } = require('../utils/requestUtils');
 
 async function getAllPosts(req, res) {
   try {
-    const allPosts = await Post.find().populate('user');
+    const allPosts = await Post.find().populate('user').sort({ timestamp: -1 });
     return res.status(200).json(allPosts);
   } catch (err) {
     console.error(err);
